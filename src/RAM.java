@@ -4,11 +4,18 @@ public class RAM extends  Component{
     private int actualTemperature;
     private int timing;
 
-    public RAM(String model, String producer, String serialNumber, double quantity, int actualTemperature, int timing) {
+    public RAM(String model, String producer, String serialNumber, double quantity, int actualTemperature, int timing) throws TooHighTemperatureException {
         super(model, producer, serialNumber);
         this.quantity = quantity;
         this.actualTemperature = actualTemperature;
         this.timing = timing;
+        isHigher(actualTemperature);
+    }
+
+    public void isHigher(int actualTemperature) throws TooHighTemperatureException {
+        if(actualTemperature>MAX_TEMPERATURE){
+            throw new TooHighTemperatureException(MAX_TEMPERATURE, actualTemperature);
+        }
     }
 
     public double getQuantity() {
@@ -23,10 +30,6 @@ public class RAM extends  Component{
         return actualTemperature;
     }
 
-    public void setActualTemperature(int actualTemperature) {
-        this.actualTemperature = actualTemperature;
-    }
-
     public int getTiming() {
         return timing;
     }
@@ -36,9 +39,7 @@ public class RAM extends  Component{
     }
 
     public void increaseTiming() throws TooHighTemperatureException {
-        if(actualTemperature>=MAX_TEMPERATURE-15){
-            throw new TooHighTemperatureException(MAX_TEMPERATURE, actualTemperature+15);
-        }
+        isHigher(actualTemperature);
         actualTemperature += 15;
         timing += 100;
     }
