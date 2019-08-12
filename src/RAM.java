@@ -9,10 +9,10 @@ public class RAM extends  Component{
         this.quantity = quantity;
         this.actualTemperature = actualTemperature;
         this.timing = timing;
-        isHigher(actualTemperature);
+        tooHighTemperature(actualTemperature);
     }
 
-    public void isHigher(int actualTemperature) throws TooHighTemperatureException {
+    private void tooHighTemperature(int actualTemperature) throws TooHighTemperatureException {
         if(actualTemperature>MAX_TEMPERATURE){
             throw new TooHighTemperatureException(MAX_TEMPERATURE, actualTemperature);
         }
@@ -39,7 +39,7 @@ public class RAM extends  Component{
     }
 
     public void increaseTiming() throws TooHighTemperatureException {
-        isHigher(actualTemperature);
+        tooHighTemperature(actualTemperature);
         actualTemperature += 15;
         timing += 100;
     }

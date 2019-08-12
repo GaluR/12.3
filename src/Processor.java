@@ -5,12 +5,12 @@ public class Processor extends Component{
 
     public Processor(String model, String producer, String serialNumber, int timing, double actualTemperature) throws TooHighTemperatureException {
         super(model, producer, serialNumber);
-        isHigher(actualTemperature);
+        tooHighTemperature(actualTemperature);
         this.timing = timing;
         this.actualTemperature = actualTemperature;
     }
 
-    public void isHigher(double actualTemperature) throws TooHighTemperatureException {
+    private void tooHighTemperature(double actualTemperature) throws TooHighTemperatureException {
         if(actualTemperature>MAX_TEMPERATURE) {
             throw new TooHighTemperatureException(MAX_TEMPERATURE, actualTemperature);
         }
@@ -29,7 +29,7 @@ public class Processor extends Component{
     }
 
     public void increaseTiming() throws TooHighTemperatureException {
-        isHigher(actualTemperature);
+        tooHighTemperature(actualTemperature);
         actualTemperature += 10;
         timing += 100;
     }

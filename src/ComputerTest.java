@@ -13,12 +13,6 @@ public class ComputerTest {
             computer.getProcessor().increaseTiming();
             computer.getProcessor().increaseTiming();
             computer.getProcessor().increaseTiming();
-        } catch (TooHighTemperatureException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println(computer.toString());
-
-        try {
             computer.getRam().increaseTiming();
             computer.getRam().increaseTiming();
             computer.getRam().increaseTiming();
